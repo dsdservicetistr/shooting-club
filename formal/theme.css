@@ -1,0 +1,27 @@
+/* ธีมแบบเป็นทางการ: กระดาษเป้าสีเย็น หมึกน้ำเงินเข้ม เขียวสนามยิง และทองเหลืองเฉพาะจุดสำคัญ */
+:root {
+  --bg: #f2f4f1;
+  --surface: #ffffff;
+  --tint: #e5ebe6;
+  --ink: #121a21;
+  --muted: #55606a;
+  --line: #c6cec9;
+  --accent: #24493d;
+  --accent-ink: #ffffff;
+  --mark: #b08d2f;
+  --mark-ink: #121a21;
+  --header-bg: #f9faf8;
+  --footer-bg: #121a21;
+  --footer-ink: #f2f4f1;
+  --target-paper: #f2f4f1;
+  --target-ink: #121a21;
+  --radius: 2px;
+  --font-head: 'Noto Serif Thai', 'Noto Serif', Georgia, serif;
+  --font-body: 'IBM Plex Sans Thai', 'Sarabun', system-ui, 'Segoe UI', sans-serif;
+}
+h1, h2 { font-weight: 700; letter-spacing: -.005em; }
+.hero { border-bottom: 1px solid var(--line); }
+.hero-slogan { color: var(--accent); }
+h2 { padding-bottom: .35em; border-bottom: 1px solid var(--line); max-width: 760px; }
+.member-group h2, .page-head h1 + p { border: 0; }
+.block-tint h2 { border-bottom-color: var(--ink); }

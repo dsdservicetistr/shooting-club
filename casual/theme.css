@@ -1,0 +1,73 @@
+/* ธีมแบบกันเอง: เหลืองสติกเกอร์เป้ายิง หมึกเข้ม ส้มสะท้อนแสง ขอบหนา เงาแข็ง */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --tint: #fff1a8;
+  --ink: #14141f;
+  --muted: #4d4d5c;
+  --line: #14141f;
+  --accent: #14141f;
+  --accent-ink: #ffd91a;
+  --mark: #ff4b1f;
+  --mark-ink: #14141f;
+  --header-bg: #ffd91a;
+  --footer-bg: #14141f;
+  --footer-ink: #ffd91a;
+  --target-paper: #ffffff;
+  --target-ink: #14141f;
+  --radius: 16px;
+  --font-head: 'Prompt', 'Noto Sans Thai', system-ui, sans-serif;
+  --font-body: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
+  --pop: 4px 4px 0 var(--ink);
+}
+body { font-size: 19px; }
+h1, h2, h3 { font-weight: 700; }
+.site-header { border-bottom: 3px solid var(--ink); }
+.nav a:hover { border-bottom-color: var(--ink); }
+.nav a[aria-current="page"] { border-bottom-width: 0; background: var(--bg); border-radius: 999px; padding: 6px 16px; box-shadow: 0 0 0 2px var(--ink); }
+.banner { border-bottom: 3px solid var(--ink); }
+
+.btn { border: 3px solid var(--ink); box-shadow: var(--pop); transition: transform .12s, box-shadow .12s; }
+.btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); filter: none; }
+.btn-quiet { background: #fff; color: var(--ink); }
+.btn-quiet:hover { background: var(--tint); }
+
+.hero { background: var(--header-bg); border-bottom: 3px solid var(--ink); }
+.hero-slogan { display: inline-block; background: var(--ink); color: var(--accent-ink); padding: 2px 16px; border-radius: 999px; font-size: 1.2rem; transform: rotate(-1.5deg); }
+.hero-meta { color: var(--ink); }
+.target { transform: rotate(7deg); filter: drop-shadow(8px 8px 0 var(--ink)); }
+.tg-ring { stroke-width: 2; }
+.tg-hole { fill: #ffd91a; stroke: var(--mark); stroke-width: 2.5; }
+
+.block-tint { background: var(--tint); border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); }
+.perks { gap: 24px; }
+.perk { background: #fff; border: 3px solid var(--ink); border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--pop); }
+.perk h3 { margin-bottom: .3em; }
+.perk-main { background: var(--mark); border-top: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); }
+.perk-big span { color: var(--ink); }
+.perk-fact { color: var(--ink); background: var(--tint); display: inline-block; padding: 0 10px; border-radius: 8px; }
+.join { background: var(--header-bg); border-top: 3px solid var(--ink); margin-bottom: -40px; padding-bottom: 96px; }
+.join-phone a { border-bottom: 4px solid var(--ink); }
+.join-who { color: var(--ink); }
+
+.search input { border: 3px solid var(--ink); border-radius: 999px; padding: 12px 22px; box-shadow: var(--pop); }
+.search input:focus { border-color: var(--ink); outline: 3px solid var(--mark); }
+.member-photo { border: 3px solid var(--ink); box-shadow: var(--pop); background: var(--tint); }
+.member:nth-child(odd) .member-photo { transform: rotate(-1.5deg); }
+.member:nth-child(even) .member-photo { transform: rotate(1.5deg); }
+.member-name { margin-top: 14px; }
+.ph-empty { color: var(--ink); }
+
+.tabs { border-bottom: 0; gap: 10px; }
+.tab { border: 3px solid var(--ink); border-radius: 999px; background: #fff; color: var(--ink); padding: 6px 22px; }
+.tab:hover { background: var(--tint); }
+.tab.is-on { background: var(--ink); color: var(--accent-ink); border-bottom-color: var(--ink); }
+.comp { background: #fff; border: 3px solid var(--ink); border-radius: var(--radius); padding: 22px; box-shadow: var(--pop); }
+.scores { border-top: 0; border: 3px solid var(--ink); border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; }
+.scores th { background: var(--tint); color: var(--ink); }
+.scores th, .scores td { border-bottom: 2px solid var(--ink); }
+.scores tr:last-child td { border-bottom: 0; }
+.scores .rank { color: var(--mark); font-size: 1.3rem; -webkit-text-stroke: .5px var(--ink); }
+.photo, .video, .video-frame { border: 3px solid var(--ink); box-shadow: var(--pop); }
+.play { background: var(--mark); border: 3px solid var(--ink); }
+.play::after { border-left-color: var(--ink); left: 26px; }
