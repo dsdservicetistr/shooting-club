@@ -71,3 +71,6 @@ h1, h2, h3 { font-weight: 700; }
 .photo, .video, .video-frame { border: 3px solid var(--ink); box-shadow: var(--pop); }
 .play { background: var(--mark); border: 3px solid var(--ink); }
 .play::after { border-left-color: var(--ink); left: 26px; }
+.perk-feature { padding: 14px; }
+.feature-media { border: 3px solid var(--ink); }
+.feature-text { padding: 16px 8px 6px; }

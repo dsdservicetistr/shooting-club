@@ -26,7 +26,10 @@ window.CLUB_STRINGS = {
     coachTitle: 'มีคนสอนใกล้ชิด',
     coachBody: 'ไม่เคยจับปืนก็ไม่ต้องกลัว มีคนสอนให้ทีละขั้น',
     welcomeTitle: 'รับน้องใหม่',
-    welcomeBody: 'กำลังคิดกิจกรรมอยู่ เดี๋ยวมาประกาศที่นี่'
+    welcomeBody: 'กำลังคิดกิจกรรมอยู่ เดี๋ยวมาประกาศที่นี่',
+    ribbon: 'เร็ว ๆ นี้',
+    featureTitle: 'ให้ลอง Beretta T1',
+    featureBody: 'เตรียมให้เพื่อน ๆ ได้ลองยิงตัวนี้ เดี๋ยวมาประกาศวัน'
   },
   venuePrefix: 'ยิงกันที่: ',
   safety: {
@@ -41,6 +44,7 @@ window.CLUB_STRINGS = {
   members: {
     title: 'เพื่อน ๆ ในชมรม',
     lead: 'หน้าตาและชื่อของสมาชิกทุกรุ่น หาชื่อตัวเองหรือชื่อเพื่อนได้ในช่องค้นหา',
+    leadersTitle: 'ประธานของเรา',
     searchLabel: 'ค้นหาชื่อสมาชิก',
     searchPlaceholder: 'พิมพ์ชื่อหาได้เลย',
     found: 'เจอ {n} คน',

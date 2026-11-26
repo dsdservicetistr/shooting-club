@@ -48,6 +48,17 @@
   }
 
   /* ---------- หน้าแรก ---------- */
+  // การ์ด "เร็ว ๆ นี้" (เช่น ให้ลอง Beretta T1) — รูปมาจาก Config: perk_image
+  function featureCard(cfg) {
+    if (cfg.perk_show !== undefined && cfg.perk_show !== '' && !C.isOn(cfg.perk_show)) return '';
+    var media = cfg.perk_image
+      ? '<img src="' + esc(cfg.perk_image) + '" alt="' + esc(cfg.perk_caption || T.perks.featureTitle) + '" loading="lazy">'
+      : '<div class="feature-ph" aria-hidden="true">' + targetSvg() + '</div>';
+    return '<article class="perk perk-feature"><div class="feature-media">' + media +
+      '<span class="ribbon">' + esc(cfg.perk_ribbon || T.perks.ribbon) + '</span></div>' +
+      '<div class="feature-text"><h3>' + esc(cfg.perk_caption || T.perks.featureTitle) + '</h3><p>' + esc(T.perks.featureBody) + '</p></div></article>';
+  }
+
   function renderHome(cfg) {
     var h = '';
     if (C.isOn(cfg.banner_show) && cfg.banner_text) {
@@ -80,6 +91,7 @@
       '<article class="perk"><h3>' + esc(T.perks.boxTitle) + '</h3><p>' + esc(T.perks.boxBody) + '</p>' + boxLine + '</article>' +
       '<article class="perk"><h3>' + esc(T.perks.coachTitle) + '</h3><p>' + esc(T.perks.coachBody) + '</p></article>' +
       '<article class="perk"><h3>' + esc(T.perks.welcomeTitle) + '</h3><p>' + esc(T.perks.welcomeBody) + '</p></article>' +
+      featureCard(cfg) +
       '</div>' +
       (cfg.venue ? '<p class="venue">' + esc(T.venuePrefix) + esc(cfg.venue) + '</p>' : '') +
       '</div></section>';
@@ -108,11 +120,23 @@
     return 0; // รุ่นก่อตั้งและรุ่นพิเศษขึ้นก่อน
   }
 
+  function photoHtml(m) {
+    var ch = esc((m.full_name || '?').charAt(0));
+    return m.photo
+      ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.full_name) + '" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'ph-empty\',textContent:\'' + ch + '\'}))">'
+      : '<span class="ph-empty">' + ch + '</span>';
+  }
+
   function memberCard(m) {
-    var ph = m.photo
-      ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.full_name) + '" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'ph-empty\',textContent:\'' + esc((m.full_name || '?').charAt(0)) + '\'}))">'
-      : '<span class="ph-empty">' + esc((m.full_name || '?').charAt(0)) + '</span>';
-    return '<li class="member" data-name="' + esc(m.full_name) + '"><div class="member-photo">' + ph + '</div><p class="member-name">' + esc(m.full_name) + '</p></li>';
+    return '<li class="member" data-name="' + esc(m.full_name) + '"><div class="member-photo">' + photoHtml(m) + '</div><p class="member-name">' + esc(m.full_name) + '</p></li>';
+  }
+
+  // ประธาน (role มีคำว่า "ประธาน") แสดงเป็นการ์ดใหญ่ไว้บนสุด พร้อมตำแหน่งและคำโปรย
+  function isLeader(m) { return /ประธาน/.test(String(m.role || '')); }
+  function leaderCard(m) {
+    return '<li class="member member-leader" data-name="' + esc(m.full_name) + '"><div class="member-photo">' + photoHtml(m) + '</div>' +
+      '<div class="leader-text"><p class="leader-role">' + esc(m.role) + '</p><p class="member-name">' + esc(m.full_name) + '</p>' +
+      (m.tagline ? '<p class="leader-tagline">' + esc(m.tagline) + '</p>' : '') + '</div></li>';
   }
 
   function renderMembers() {
@@ -123,8 +147,13 @@
       '<p id="q-result" class="q-result" role="status"></p></div></section>';
     if (!list.length) return h + '<section class="block"><div class="wrap"><p class="empty">' + esc(T.members.empty) + '</p></div></section>';
 
+    var leaders = list.filter(isLeader), rest = list.filter(function (m) { return !isLeader(m); });
+    if (leaders.length) {
+      h += '<section class="block member-group member-leaders"><div class="wrap"><h2>' + esc(T.members.leadersTitle) + '</h2>' +
+        '<ul class="leader-grid">' + leaders.map(leaderCard).join('') + '</ul></div></section>';
+    }
     var groups = {};
-    list.forEach(function (m) { var k = genLabel(m.generation); (groups[k] = groups[k] || { o: genOrder(m.generation), items: [] }).items.push(m); });
+    rest.forEach(function (m) { var k = genLabel(m.generation); (groups[k] = groups[k] || { o: genOrder(m.generation), items: [] }).items.push(m); });
     Object.keys(groups).sort(function (a, b) { return groups[a].o - groups[b].o; }).forEach(function (k) {
       h += '<section class="block member-group"><div class="wrap"><h2>' + esc(k) + ' <small>' + groups[k].items.length + ' ท่าน</small></h2>' +
         '<ul class="member-grid">' + groups[k].items.map(memberCard).join('') + '</ul></div></section>';

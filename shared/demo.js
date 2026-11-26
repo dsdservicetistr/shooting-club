@@ -14,13 +14,17 @@ window.CLUB_DEMO = {
     venue: '',
     banner_show: '1',
     banner_text: 'เร็ว ๆ นี้ ให้ลอง Beretta T1',
-    banner_image: ''
+    banner_image: '',
+    perk_show: '1',
+    perk_image: '',
+    perk_caption: 'ให้ลอง Beretta T1',
+    perk_ribbon: 'เร็ว ๆ นี้'
   },
   members: [
-    { id: 'M001', full_name: 'สมาชิกตัวอย่าง หนึ่ง', photo: '', generation: '2', role: 'ประธานชมรม' },
-    { id: 'M002', full_name: 'สมาชิกตัวอย่าง สอง', photo: '', generation: '2', role: '' },
-    { id: 'M004', full_name: 'สมาชิกตัวอย่าง สี่', photo: '', generation: 'ก่อตั้ง', role: '' },
-    { id: 'M005', full_name: 'สมาชิกตัวอย่าง ห้า', photo: '', generation: 'ก่อตั้ง', role: '' }
+    { id: 'M001', full_name: 'ประธานรุ่นก่อตั้ง ตัวอย่าง', photo: '', generation: 'ก่อตั้ง', role: 'ประธานรุ่นก่อตั้ง', tagline: 'คำโปรยของประธานรุ่นก่อตั้ง' },
+    { id: 'M002', full_name: 'ประธานปัจจุบัน ตัวอย่าง', photo: '', generation: '2', role: 'ประธานชมรมปัจจุบัน', tagline: 'คำโปรยของประธานปัจจุบัน' },
+    { id: 'M003', full_name: 'สมาชิกตัวอย่าง สาม', photo: '', generation: '2', role: '', tagline: '' },
+    { id: 'M005', full_name: 'สมาชิกตัวอย่าง ห้า', photo: '', generation: 'ก่อตั้ง', role: '', tagline: '' }
   ],
   competitions: [
     { id: 'C001', year: 2568, name: 'การแข่งขันตัวอย่าง ครั้งที่ 1', venue: 'สนามตัวอย่าง', date: '2025-06-15', category: 'ปืนสั้น', summary: 'สรุปผลสั้น ๆ ของการแข่งขัน' },

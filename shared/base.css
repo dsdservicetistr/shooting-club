@@ -66,6 +66,17 @@ p { margin: 0 0 1em; }
 .perk-fact { font-weight: 600; color: var(--accent); }
 .venue { margin-top: 24px; color: var(--muted); }
 
+/* การ์ดเร็ว ๆ นี้ (รูปใหญ่เต็มความกว้าง + ริบบิ้นเฉียง) */
+.perk-feature { grid-column: 1 / -1; display: block; padding: 0; border-top: 3px solid var(--ink); margin-top: 8px; }
+.feature-media { position: relative; overflow: hidden; aspect-ratio: 16 / 9; max-height: 620px; width: 100%; background: var(--tint); border-radius: var(--radius); }
+.feature-media > img { width: 100%; height: 100%; object-fit: cover; }
+.feature-ph { height: 100%; display: grid; place-items: center; opacity: .35; padding: 24px; }
+.feature-ph .target { max-width: 340px; margin: 0; transform: none; filter: none; }
+.feature-text { padding: 18px 0 4px; }
+.feature-text h3 { font-size: 1.6rem; margin-bottom: .2em; }
+.feature-text p { margin: 0; color: var(--muted); }
+.ribbon { position: absolute; top: 38px; left: -68px; width: 280px; padding: 8px 0; text-align: center; transform: rotate(-45deg); background: var(--mark); color: var(--mark-ink); font-size: 1.25rem; font-weight: 700; box-shadow: 0 3px 8px rgba(0, 0, 0, .3); }
+
 /* เข้าร่วม */
 .join-phone { font-family: var(--font-head); font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 700; margin-bottom: .2em; }
 .join-phone a { text-decoration: none; border-bottom: 3px solid var(--mark); }
@@ -86,6 +97,15 @@ p { margin: 0 0 1em; }
 .member-photo img { width: 100%; height: 100%; object-fit: cover; }
 .ph-empty { font-family: var(--font-head); font-size: 3rem; color: var(--muted); }
 .member-name { margin: 10px 0 0; font-weight: 600; line-height: 1.4; }
+
+/* ประธาน */
+.leader-grid { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
+.member-leader { display: grid; grid-template-columns: 170px 1fr; gap: 22px; align-items: center; }
+.leader-role { margin: 0 0 .2em; font-weight: 600; color: var(--accent); }
+.member-leader .member-name { margin: 0 0 .4em; font-family: var(--font-head); font-size: 1.3rem; }
+.leader-tagline { margin: 0; color: var(--muted); font-style: italic; }
+.leader-tagline::before { content: "\201C"; }
+.leader-tagline::after { content: "\201D"; }
 
 /* ผลแข่ง */
 .tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-bottom: 32px; }
@@ -140,6 +160,10 @@ p { margin: 0 0 1em; }
   .target { max-width: 280px; margin: 0 auto; }
   .perks { grid-template-columns: 1fr; }
   .perk-main { grid-template-columns: 1fr; gap: 8px; }
+  .feature-media { aspect-ratio: 4 / 3; }
+  .ribbon { top: 26px; left: -60px; width: 220px; font-size: 1rem; }
+  .member-leader { grid-template-columns: 120px 1fr; gap: 16px; }
+  .leader-grid { grid-template-columns: 1fr; }
   .block { padding: 40px 0; }
   .scores th, .scores td { padding: 8px 6px; }
 }
