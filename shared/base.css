@@ -72,6 +72,10 @@ p { margin: 0 0 1em; }
 .feature-media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .feature-ph { height: 100%; display: grid; place-items: center; opacity: .35; padding: 24px; }
 .feature-ph .target { max-width: 340px; margin: 0; transform: none; filter: none; }
+/* มีรูปจริง: กรอบหดตามขนาดรูป ไม่ขยายรูปเล็กจนแตก (รูปใหญ่ย่อลงให้พอดีหน้าจอ) */
+.feature-media.has-img { width: fit-content; max-width: 100%; aspect-ratio: auto; max-height: none; }
+.feature-media.has-img > .feature-ph { display: none; }
+.feature-media.has-img > img { position: static; display: block; width: auto; height: auto; max-width: 100%; max-height: 620px; object-fit: contain; }
 .feature-text { padding: 18px 0 4px; }
 .feature-text h3 { font-size: 1.6rem; margin-bottom: .2em; }
 .feature-text p { margin: 0; color: var(--muted); }

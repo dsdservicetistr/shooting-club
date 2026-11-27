@@ -55,7 +55,7 @@
     var media = ph + (cfg.perk_image
       ? '<img src="' + esc(C.driveImg(cfg.perk_image, 1200)) + '" alt="' + esc(cfg.perk_caption || T.perks.featureTitle) + '" loading="lazy" referrerpolicy="no-referrer" data-sizes="1000,800,500" onerror="CLUB.imgFallback(this)">'
       : '');
-    return '<article class="perk perk-feature"><div class="feature-media">' + media +
+    return '<article class="perk perk-feature"><div class="feature-media' + (cfg.perk_image ? ' has-img' : '') + '">' + media +
       '<span class="ribbon">' + esc(cfg.perk_ribbon || T.perks.ribbon) + '</span></div>' +
       '<div class="feature-text"><h3>' + esc(cfg.perk_caption || T.perks.featureTitle) + '</h3><p>' + esc(T.perks.featureBody) + '</p></div></article>';
   }

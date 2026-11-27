@@ -47,7 +47,7 @@
     var list = (img.getAttribute('data-sizes') || '').split(',').filter(Boolean);
     var m = String(img.src).match(/[?&]id=([\w-]+)/);
     var next = list.shift();
-    if (!m || !next) { img.remove(); return; }
+    if (!m || !next) { if (img.parentNode) img.parentNode.classList.remove('has-img'); img.remove(); return; }
     img.setAttribute('data-sizes', list.join(','));
     img.src = 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w' + next;
   }
