@@ -69,7 +69,7 @@ p { margin: 0 0 1em; }
 /* การ์ดเร็ว ๆ นี้ (รูปใหญ่เต็มความกว้าง + ริบบิ้นเฉียง) */
 .perk-feature { grid-column: 1 / -1; display: block; padding: 0; border-top: 3px solid var(--ink); margin-top: 8px; }
 .feature-media { position: relative; overflow: hidden; aspect-ratio: 16 / 9; max-height: 620px; width: 100%; background: var(--tint); border-radius: var(--radius); }
-.feature-media > img { width: 100%; height: 100%; object-fit: cover; }
+.feature-media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .feature-ph { height: 100%; display: grid; place-items: center; opacity: .35; padding: 24px; }
 .feature-ph .target { max-width: 340px; margin: 0; transform: none; filter: none; }
 .feature-text { padding: 18px 0 4px; }

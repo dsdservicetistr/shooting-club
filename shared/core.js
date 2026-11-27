@@ -30,6 +30,18 @@
       });
   }
 
+  // แปลงลิงก์ Drive ทุกแบบ (หรือ file id เปล่า ๆ) เป็น URL รูปที่ฝังได้ — ทำซ้ำได้ ไม่เสียหาย
+  function driveImg(v, w) {
+    v = String(v || '').trim();
+    if (!v) return '';
+    if (/drive\.google\.com\/thumbnail/.test(v)) return v;
+    var m = v.match(/\/d\/([\w-]+)/) || v.match(/[?&]id=([\w-]+)/);
+    if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w' + (w || 800);
+    if (/^https?:/i.test(v)) return v;
+    if (/^[\w-]{20,}$/.test(v)) return 'https://drive.google.com/thumbnail?id=' + v + '&sz=w' + (w || 800);
+    return v;
+  }
+
   function isOn(v) { return String(v) === '1' || String(v).toLowerCase() === 'true'; }
 
   function telHref(p) {
@@ -46,5 +58,5 @@
     return Number(m[3]) + ' ' + months[Number(m[2]) - 1] + ' ' + (Number(m[1]) + 543);
   }
 
-  window.CLUB = { esc: esc, isDemo: isDemo, loadAll: loadAll, isOn: isOn, telHref: telHref, thaiDate: thaiDate };
+  window.CLUB = { driveImg: driveImg, esc: esc, isDemo: isDemo, loadAll: loadAll, isOn: isOn, telHref: telHref, thaiDate: thaiDate };
 })();

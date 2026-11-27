@@ -23,7 +23,7 @@
   function pageFile() { return document.body.getAttribute('data-page') + '.html'; }
 
   function header(cfg) {
-    var logo = cfg.logo ? '<img class="brand-logo" src="' + esc(cfg.logo) + '" alt="">' : '';
+    var logo = cfg.logo ? '<img class="brand-logo" src="' + esc(C.driveImg(cfg.logo, 600)) + '" alt="">' : '';
     var pages = [['index', T.nav.home], ['members', T.nav.members], ['results', T.nav.results]];
     var cur = document.body.getAttribute('data-page');
     var links = pages.map(function (p) {
@@ -51,9 +51,10 @@
   // การ์ด "เร็ว ๆ นี้" (เช่น ให้ลอง Beretta T1) — รูปมาจาก Config: perk_image
   function featureCard(cfg) {
     if (cfg.perk_show !== undefined && cfg.perk_show !== '' && !C.isOn(cfg.perk_show)) return '';
-    var media = cfg.perk_image
-      ? '<img src="' + esc(cfg.perk_image) + '" alt="' + esc(cfg.perk_caption || T.perks.featureTitle) + '" loading="lazy">'
-      : '<div class="feature-ph" aria-hidden="true">' + targetSvg() + '</div>';
+    var ph = '<div class="feature-ph" aria-hidden="true">' + targetSvg() + '</div>';
+    var media = ph + (cfg.perk_image
+      ? '<img src="' + esc(C.driveImg(cfg.perk_image, 1200)) + '" alt="' + esc(cfg.perk_caption || T.perks.featureTitle) + '" loading="lazy" onerror="this.remove()">'
+      : '');
     return '<article class="perk perk-feature"><div class="feature-media">' + media +
       '<span class="ribbon">' + esc(cfg.perk_ribbon || T.perks.ribbon) + '</span></div>' +
       '<div class="feature-text"><h3>' + esc(cfg.perk_caption || T.perks.featureTitle) + '</h3><p>' + esc(T.perks.featureBody) + '</p></div></article>';
@@ -63,7 +64,7 @@
     var h = '';
     if (C.isOn(cfg.banner_show) && cfg.banner_text) {
       h += '<div class="banner"><div class="wrap banner-in">' +
-        (cfg.banner_image ? '<img class="banner-img" src="' + esc(cfg.banner_image) + '" alt="">' : '') +
+        (cfg.banner_image ? '<img class="banner-img" src="' + esc(C.driveImg(cfg.banner_image, 1200)) + '" alt="">' : '') +
         '<span>' + esc(cfg.banner_text) + '</span></div></div>';
     }
 
@@ -123,7 +124,7 @@
   function photoHtml(m) {
     var ch = esc((m.full_name || '?').charAt(0));
     return m.photo
-      ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.full_name) + '" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'ph-empty\',textContent:\'' + ch + '\'}))">'
+      ? '<img src="' + esc(C.driveImg(m.photo, 500)) + '" alt="' + esc(m.full_name) + '" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'ph-empty\',textContent:\'' + ch + '\'}))">'
       : '<span class="ph-empty">' + ch + '</span>';
   }
 
