@@ -53,7 +53,7 @@
     if (cfg.perk_show !== undefined && cfg.perk_show !== '' && !C.isOn(cfg.perk_show)) return '';
     var ph = '<div class="feature-ph" aria-hidden="true">' + targetSvg() + '</div>';
     var media = ph + (cfg.perk_image
-      ? '<img src="' + esc(C.driveImg(cfg.perk_image, 1200)) + '" alt="' + esc(cfg.perk_caption || T.perks.featureTitle) + '" loading="lazy" onerror="this.remove()">'
+      ? '<img src="' + esc(C.driveImg(cfg.perk_image, 1200)) + '" alt="' + esc(cfg.perk_caption || T.perks.featureTitle) + '" loading="lazy" referrerpolicy="no-referrer" data-sizes="1000,800,500" onerror="CLUB.imgFallback(this)">'
       : '');
     return '<article class="perk perk-feature"><div class="feature-media">' + media +
       '<span class="ribbon">' + esc(cfg.perk_ribbon || T.perks.ribbon) + '</span></div>' +

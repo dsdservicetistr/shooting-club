@@ -42,6 +42,16 @@
     return v;
   }
 
+  // รูป Drive โหลดไม่ขึ้น: ลองขนาดเล็กลงตามลำดับใน data-sizes ถ้าหมดแล้วค่อยเอารูปออก
+  function imgFallback(img) {
+    var list = (img.getAttribute('data-sizes') || '').split(',').filter(Boolean);
+    var m = String(img.src).match(/[?&]id=([\w-]+)/);
+    var next = list.shift();
+    if (!m || !next) { img.remove(); return; }
+    img.setAttribute('data-sizes', list.join(','));
+    img.src = 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w' + next;
+  }
+
   function isOn(v) { return String(v) === '1' || String(v).toLowerCase() === 'true'; }
 
   function telHref(p) {
@@ -58,5 +68,5 @@
     return Number(m[3]) + ' ' + months[Number(m[2]) - 1] + ' ' + (Number(m[1]) + 543);
   }
 
-  window.CLUB = { driveImg: driveImg, esc: esc, isDemo: isDemo, loadAll: loadAll, isOn: isOn, telHref: telHref, thaiDate: thaiDate };
+  window.CLUB = { imgFallback: imgFallback, driveImg: driveImg, esc: esc, isDemo: isDemo, loadAll: loadAll, isOn: isOn, telHref: telHref, thaiDate: thaiDate };
 })();
