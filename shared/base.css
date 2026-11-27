@@ -96,20 +96,25 @@ p { margin: 0 0 1em; }
 /* สมาชิก */
 .member-group { padding-top: 24px; padding-bottom: 24px; }
 .member-group h2 small { font: 400 .9rem var(--font-body); color: var(--muted); margin-left: .5em; }
-.member-grid { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 28px 20px; }
+.member-grid { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 28px 20px; }
 .member-photo { aspect-ratio: 3 / 4; background: var(--tint); border: 1px solid var(--line); overflow: hidden; display: grid; place-items: center; border-radius: var(--radius); }
 .member-photo img { width: 100%; height: 100%; object-fit: cover; }
 .ph-empty { font-family: var(--font-head); font-size: 3rem; color: var(--muted); }
 .member-name { margin: 10px 0 0; font-weight: 600; line-height: 1.4; }
 
-/* ประธาน */
-.leader-grid { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
-.member-leader { display: grid; grid-template-columns: 170px 1fr; gap: 22px; align-items: center; }
+/* ผู้นำ: แถวใหญ่ รูปชิดซ้าย */
+.nm { white-space: nowrap; }
+.leader-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.leader-row { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 36px; align-items: start; padding: 32px 0; border-top: 1px solid var(--line); }
+.leader-row:first-child { border-top: 0; }
+.leader-text { max-width: 44em; }
 .leader-role { margin: 0 0 .2em; font-weight: 600; color: var(--accent); }
-.member-leader .member-name { margin: 0 0 .4em; font-family: var(--font-head); font-size: 1.3rem; }
-.leader-tagline { margin: 0; color: var(--muted); font-style: italic; }
+.leader-row .member-name { margin: 0 0 .5em; font-family: var(--font-head); font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.35; }
+.leader-tagline { margin: 0 0 .9em; font-size: 1.15rem; font-style: italic; color: var(--ink); }
 .leader-tagline::before { content: "\201C"; }
 .leader-tagline::after { content: "\201D"; }
+.leader-bio { margin: 0; color: var(--muted); }
+.member-role { margin: 2px 0 0; font-size: .9rem; color: var(--muted); }
 
 /* ผลแข่ง */
 .tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-bottom: 32px; }
@@ -166,8 +171,8 @@ p { margin: 0 0 1em; }
   .perk-main { grid-template-columns: 1fr; gap: 8px; }
   .feature-media { aspect-ratio: 4 / 3; }
   .ribbon { top: 26px; left: -60px; width: 220px; font-size: 1rem; }
-  .member-leader { grid-template-columns: 120px 1fr; gap: 16px; }
-  .leader-grid { grid-template-columns: 1fr; }
+  .leader-row { grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 22px 0; }
+  .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 14px; }
   .block { padding: 40px 0; }
   .scores th, .scores td { padding: 8px 6px; }
 }

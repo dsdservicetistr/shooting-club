@@ -108,17 +108,9 @@
   }
 
   /* ---------- สมาชิก ---------- */
-  function genLabel(g) {
-    g = String(g || '').trim();
-    if (!g) return T.members.noGen;
-    if (/^\d+$/.test(g)) return 'รุ่นที่ ' + g;
-    return 'รุ่น' + g;
-  }
-  function genOrder(g) {
-    g = String(g || '').trim();
-    if (!g) return 9999;
-    if (/^\d+$/.test(g)) return Number(g);
-    return 0; // รุ่นก่อตั้งและรุ่นพิเศษขึ้นก่อน
+  // ชื่อไทย: ชื่อกับนามสกุลต้องไม่ถูกตัดกลางคำ — ขึ้นบรรทัดใหม่ได้เฉพาะตรงช่องว่าง
+  function fmtName(n) {
+    return String(n || '').trim().split(/\s+/).map(function (w) { return '<span class="nm">' + esc(w) + '</span>'; }).join(' ');
   }
 
   function photoHtml(m) {
@@ -128,16 +120,19 @@
       : '<span class="ph-empty">' + ch + '</span>';
   }
 
-  function memberCard(m) {
-    return '<li class="member" data-name="' + esc(m.full_name) + '"><div class="member-photo">' + photoHtml(m) + '</div><p class="member-name">' + esc(m.full_name) + '</p></li>';
+  // ประธาน/รองประธาน (ช่อง role มีคำว่า "ประธาน") แสดงเป็นแถวใหญ่: รูปซ้าย + ชื่อ + คำโปรย + ประวัติ
+  function isLeader(m) { return /ประธาน/.test(String(m.role || '')); }
+  function leaderRow(m) {
+    return '<li class="member leader-row" data-name="' + esc(m.full_name) + '"><div class="member-photo">' + photoHtml(m) + '</div>' +
+      '<div class="leader-text"><p class="leader-role">' + esc(m.role) + '</p><h3 class="member-name">' + fmtName(m.full_name) + '</h3>' +
+      (m.tagline ? '<p class="leader-tagline">' + esc(m.tagline) + '</p>' : '') +
+      (m.bio ? '<p class="leader-bio">' + esc(m.bio) + '</p>' : '') + '</div></li>';
   }
 
-  // ประธาน (role มีคำว่า "ประธาน") แสดงเป็นการ์ดใหญ่ไว้บนสุด พร้อมตำแหน่งและคำโปรย
-  function isLeader(m) { return /ประธาน/.test(String(m.role || '')); }
-  function leaderCard(m) {
-    return '<li class="member member-leader" data-name="' + esc(m.full_name) + '"><div class="member-photo">' + photoHtml(m) + '</div>' +
-      '<div class="leader-text"><p class="leader-role">' + esc(m.role) + '</p><p class="member-name">' + esc(m.full_name) + '</p>' +
-      (m.tagline ? '<p class="leader-tagline">' + esc(m.tagline) + '</p>' : '') + '</div></li>';
+  // คนอื่น ๆ: การ์ดเล็ก มีตำแหน่งใต้ชื่อ (ช่อง role ว่าง = สมาชิกทั่วไป)
+  function memberCard(m) {
+    return '<li class="member" data-name="' + esc(m.full_name) + '"><div class="member-photo">' + photoHtml(m) + '</div>' +
+      '<p class="member-name">' + fmtName(m.full_name) + '</p><p class="member-role">' + esc(m.role || T.members.noRole) + '</p></li>';
   }
 
   function renderMembers() {
@@ -151,14 +146,12 @@
     var leaders = list.filter(isLeader), rest = list.filter(function (m) { return !isLeader(m); });
     if (leaders.length) {
       h += '<section class="block member-group member-leaders"><div class="wrap"><h2>' + esc(T.members.leadersTitle) + '</h2>' +
-        '<ul class="leader-grid">' + leaders.map(leaderCard).join('') + '</ul></div></section>';
+        '<ul class="leader-list">' + leaders.map(leaderRow).join('') + '</ul></div></section>';
     }
-    var groups = {};
-    rest.forEach(function (m) { var k = genLabel(m.generation); (groups[k] = groups[k] || { o: genOrder(m.generation), items: [] }).items.push(m); });
-    Object.keys(groups).sort(function (a, b) { return groups[a].o - groups[b].o; }).forEach(function (k) {
-      h += '<section class="block member-group"><div class="wrap"><h2>' + esc(k) + ' <small>' + groups[k].items.length + ' ท่าน</small></h2>' +
-        '<ul class="member-grid">' + groups[k].items.map(memberCard).join('') + '</ul></div></section>';
-    });
+    if (rest.length) {
+      h += '<section class="block member-group"><div class="wrap"><h2>' + esc(T.members.restTitle) + '</h2>' +
+        '<ul class="member-grid">' + rest.map(memberCard).join('') + '</ul></div></section>';
+    }
     return h;
   }
 
